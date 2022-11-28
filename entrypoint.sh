@@ -3,6 +3,17 @@
 set -x # print command been ran
 set -e # fail if any command fails
 
+# Note, to disable non-auth in mongodb is kind of complicated.
+# https://www.mongodb.com/features/mongodb-authentication
+# https://dba.stackexchange.com/a/292134
+#
+# Note, the `_getEnv` function is internal and undocumented[3].
+#
+# openssl s_client -connect my-mongodb-pod.my-mongo-ns.svc:17011 -state -debug -showcerts
+#
+# 1. https://gist.github.com/thilinapiy/0c5abc2c0c28efe1bbe2165b0d8dc115
+# 2. https://stackoverflow.com/a/54726708/2768067
+# 3. https://stackoverflow.com/a/67037065/2768067
 
 MONGO_PRIVATE_PORT="27017"
 
