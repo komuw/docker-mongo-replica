@@ -48,12 +48,13 @@ mongo --port "${MONGO_PRIVATE_PORT}" --eval '
     sleep(3000);
     rs.status();';
 
+# roles: https://www.mongodb.com/docs/manual/reference/built-in-roles/#superuser-roles
 printf "\n\t mongod: add user \n\n";
 mongo --port "${MONGO_PRIVATE_PORT}" --eval '
     db.getSiblingDB("admin").createUser({
     user: _getEnv("MONGO_INITDB_ROOT_USERNAME"), 
     pwd: _getEnv("MONGO_INITDB_ROOT_PASSWORD"), 
-    roles: [{ role: "userAdminAnyDatabase", db: "admin" }]
+    roles: [{ role: "root", db: "admin" }]
     });';
 
 printf "\n\t mongod: shutdown \n\n";
