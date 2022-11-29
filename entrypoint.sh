@@ -29,7 +29,7 @@ mongod \
     --quiet > /tmp/mongo.log.json 2>&1 &
 
 while ! nc -z localhost "${MONGO_PRIVATE_PORT}"; do
-  printf "\n\t sleep waiting for port ${MONGO_PRIVATE_PORT} \n"
+  printf "\n\t waiting for port ${MONGO_PRIVATE_PORT} \n"
   sleep 1; # wait & retry
 done
 
@@ -45,7 +45,7 @@ mongo --port "${MONGO_PRIVATE_PORT}" --eval '
         { _id: 0, host : _getEnv("KUBERNETES_PUBLIC_IP") + ":" + _getEnv("MONGO_PUBLIC_PORT") }
         ]
     });
-    sleep(3000);
+    // sleep(3000);
     rs.status();';
 
 # roles: https://www.mongodb.com/docs/manual/reference/built-in-roles/#superuser-roles
