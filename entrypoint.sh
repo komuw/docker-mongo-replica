@@ -59,8 +59,13 @@ mongo --port "${MONGO_PRIVATE_PORT}" --eval '
 
 printf "\n\t mongod: shutdown \n\n";
 mongod --shutdown;
-sleep 1;
+sleep 2;
 ps auxwww;
+
+printf "\n\t mongod: create keyFile \n\n";
+# https://www.mongodb.com/docs/manual/tutorial/enforce-keyfile-access-control-in-existing-replica-set/
+openssl rand -base64 756 > /usr/src/app/mongo-keyfile
+chmod 400 /usr/src/app/mongo-keyfile
 
 printf "\n\t mongod: restart with authentication \n\n";
 mongod \
@@ -69,4 +74,5 @@ mongod \
     --dbpath=/data/db \
     --bind_ip_all \
     --replSet="${MONGO_REPLICA_SET}" \
+    --keyFile=/usr/src/app/mongo-keyfile \
     --verbose=v

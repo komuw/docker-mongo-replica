@@ -21,7 +21,7 @@ docker \
   -e MONGO_INITDB_ROOT_USERNAME=someUser \
   -e MONGO_INITDB_ROOT_PASSWORD=somePasswd \
   -p 27017:27017/tcp \
-  komuw/docker-mongo-replica:v5.0.17-f60317f
+  komuw/docker-mongo-replica:v5.0.17-2ca49ce
 
 mongo \
   "mongodb://someUser:somePasswd@localhost:27017/?authSource=admin&replicaSet=myReplicaSet"
