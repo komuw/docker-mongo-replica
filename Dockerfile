@@ -1,4 +1,8 @@
-FROM mongo:4.4.3
+ARG MONGO_VERSION
+
+FROM mongo:$MONGO_VERSION
+
+LABEL repo="github.com/komuw/docker-mongo-replica"
 
 # docker build -t alas .
 # docker \
@@ -16,7 +20,7 @@ FROM mongo:4.4.3
 #
 # mongo "mongodb://someUser:somePasswd@localhost:27017/?authSource=admin&replicaSet=myReplicaSet"
 
-RUN apt -y update;apt -y install netcat
+RUN echo "using mongo version ${MONGO_VERSION}";apt -y update;apt -y install netcat
 
 WORKDIR /usr/src/app
 
